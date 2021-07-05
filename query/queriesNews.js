@@ -33,7 +33,7 @@ const addNews = (body) => {
     return new Promise(((resolve, reject) => {
         pool.query(
             `insert into news(date, name, content) values('${date}', '${name}', '${content}');`,
-            (error, result) => {
+            (error) => {
                 if(error) {
                     reject(error);
                 }

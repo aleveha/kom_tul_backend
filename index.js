@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-const newsTable = require('./queriesNews');
-const accountTable = require('./queriesAccount');
+const newsTable = require('./query/queriesNews');
+const accountTable = require('./query/queriesAccount');
 const cors = require('cors');
 
 app.use(bodyParser.json());

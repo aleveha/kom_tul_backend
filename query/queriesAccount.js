@@ -38,7 +38,7 @@ const addUser = (body) => {
             bcrypt.hash(password, salt, function (err, hash) {
                 pool.query(
                     `insert into accounts(login, password) values('${login}', '${hash}');`,
-                    (error, result) => {
+                    (error) => {
                         if (error) reject(error);
                         resolve(true);
                     }
