@@ -3,6 +3,10 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+if (process.env.DB_USER === undefined) {
+    throw Error(".env not found");
+}
+
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
