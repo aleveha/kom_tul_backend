@@ -5,6 +5,7 @@ const port = 3000;
 const newsTable = require('./query/queriesNews');
 const accountTable = require('./query/queriesAccount');
 const cors = require('cors');
+const path = "/api"
 
 app.use(bodyParser.json());
 app.use(
@@ -15,47 +16,47 @@ app.use(
 
 app.use(cors());
 
-app.get('/', (req, res) => {
+app.get(path, (req, res) => {
     res.json({
         info: "Node.js + Express.js + PostgresQL"
     });
 })
 
-app.get('/files/*', (req, res) => {
+app.get(path + '/files/*', (req, res) => {
     res.status(200).download("./" + req.path);
 })
 
-app.get('/topNews', (req, res) => {
+app.get(path + '/topNews', (req, res) => {
     newsTable.getTopNews()
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
 });
 
-app.get('/allNews', (req, res) => {
+app.get(path + '/allNews', (req, res) => {
     newsTable.getAllNews()
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
 });
 
-app.post('/addNews', (req, res) => {
+app.post(path + '/addNews', (req, res) => {
     newsTable.addNews(req.body)
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
 });
 
-app.post('/deleteNews', (req, res) => {
+app.post(path + '/deleteNews', (req, res) => {
     newsTable.deleteNews(req.body)
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
 });
 
-app.post('/checkUser', (req, res) => {
+app.post(path + '/checkUser', (req, res) => {
     accountTable.checkUser(req.body)
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
 });
 
-app.post('/addUser', (req, res) => {
+app.post(path + '/addUser', (req, res) => {
     accountTable.addUser(req.body)
         .then(response => res.status(200).send(response))
         .catch(error => res.status(500).send(error));
