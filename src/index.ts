@@ -3,7 +3,12 @@ import cors from "cors";
 import * as path from "path";
 import "dotenv";
 import { addUser, checkUser } from "./Query/accountQueries";
-import { addNews, deleteNews, getAllNews, getTopNews } from "./Query/newsQueries";
+import {
+    addNews,
+    deleteNews,
+    getAllNews,
+    getTopNews,
+} from "./Query/newsQueries";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -21,4 +21,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
-    - run: pm2 restart index.js --name backend
+    - run: cp ~/dotenv/.env ./
+    - run: pm2 restart yarn -- start --name backend
