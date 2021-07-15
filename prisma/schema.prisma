@@ -7,15 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model accounts {
-  id       Int     @id @default(autoincrement())
-  login    String? @db.VarChar(255)
-  password String? @db.VarChar(255)
+model news {
+  id      Int      @id @default(autoincrement())
+  date    DateTime @db.Date
+  name    String   @db.VarChar(255)
+  content String
 }
 
-model news {
-  id      Int       @id @default(autoincrement())
-  date    DateTime? @db.Date
-  name    String?   @db.VarChar(255)
-  content String?
+model user {
+  id       Int    @id @default(autoincrement())
+  login    String @db.VarChar(255)
+  password String @db.VarChar(255)
 }

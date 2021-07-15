@@ -2,14 +2,16 @@ import express from "express";
 import cors from "cors";
 import * as path from "path";
 import "dotenv";
-import { addUser, checkUser } from "./Query/accountQueries";
+import { addUser, checkUser, getAllUsers } from "./Query/accountQueries";
 import {
     addNews,
     deleteNews,
     getAllNews,
     getTopNews,
 } from "./Query/newsQueries";
+import { PrismaClient } from "@prisma/client";
 
+export const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const apiPath = "/api";
@@ -47,8 +49,14 @@ app.post(path.join(apiPath, "/addNews"), (req, res) => {
         .catch((error) => res.status(500).send(error));
 });
 
-app.post(path.join(apiPath, "/deleteNews"), (req, res) => {
+app.delete(path.join(apiPath, "/deleteNews"), (req, res) => {
     deleteNews(req.body)
+        .then((response) => res.status(200).send(response))
+        .catch((error) => res.status(500).send(error));
+});
+
+app.get(path.join(apiPath, "/getAllUsers"), (req, res) => {
+    getAllUsers()
         .then((response) => res.status(200).send(response))
         .catch((error) => res.status(500).send(error));
 });
