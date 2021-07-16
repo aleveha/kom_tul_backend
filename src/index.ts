@@ -1,7 +1,5 @@
 import express from "express";
-import cors from "cors";
 import * as path from "path";
-import "dotenv";
 import { addUser, checkUser, getAllUsers } from "./Query/accountQueries";
 import {
     addNews,
@@ -10,11 +8,16 @@ import {
     getTopNews,
 } from "./Query/newsQueries";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 
 export const prisma = new PrismaClient();
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const apiPath = "/api";
+
+if (PORT === undefined) {
+    throw new Error("PORT is not defined!");
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +31,7 @@ app.get(apiPath, async (req, res) => {
 });
 
 app.get(path.join(apiPath, "/files/*"), (req, res) => {
-    res.status(200).download("./" + req.path);
+    res.status(200).download(req.path.replace(apiPath, "."));
 });
 
 app.get(path.join(apiPath, "/topNews"), (req, res) => {

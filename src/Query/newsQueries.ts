@@ -13,20 +13,23 @@ export const getAllNews = async (): Promise<news[]> => {
 
 export const addNews = async (body: news): Promise<news> => {
     const { date, name, content } = body;
+
     return await prisma.news.create({
         data: {
-            date: date,
+            date: new Date(date),
             name: name,
             content: content,
         },
     });
 };
 
-export const deleteNews = async (body: news): Promise<news> => {
+export const deleteNews = async (body: news): Promise<boolean> => {
     const { id } = body;
-    return await prisma.news.delete({
+    const news = await prisma.news.delete({
         where: {
             id: Number(id),
         },
     });
+
+    return news !== null;
 };
