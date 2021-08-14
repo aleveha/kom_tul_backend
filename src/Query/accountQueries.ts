@@ -17,12 +17,17 @@ export const checkUser = async (body: user): Promise<boolean> => {
         },
     });
 
-    return user !== null && (await bcrypt.compare(password, user.password));
+    return user !== null && bcrypt.compare(password, user.password);
 };
 
-export const addUser = async (body: user): Promise<user> => {
+export const addUser = async (body: user): Promise<user | null> => {
     const { login, password } = body;
     const hash = bcrypt.hashSync(password, SALT_ROUNDS);
+    const userAlreadyExist = await checkUser(body);
+
+    if (userAlreadyExist) {
+        return null;
+    }
 
     return await prisma.user.create({
         data: {
