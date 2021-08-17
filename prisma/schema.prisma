@@ -8,14 +8,23 @@ datasource db {
 }
 
 model news {
-  id      Int      @id @default(autoincrement())
-  date    DateTime @db.Date
-  name    String   @db.VarChar(255)
-  content String
+  id         Int      @id @default(autoincrement())
+  date       DateTime @db.Date
+  name_cz    String   @db.VarChar(255)
+  name_en    String   @db.VarChar(255)
+  content_cz String
+  content_en String
 }
 
 model user {
   id       Int    @id @default(autoincrement())
   login    String @db.VarChar(255)
   password String @db.VarChar(255)
+}
+
+model news_old {
+  id      Int      @id @default(autoincrement())
+  date    DateTime @db.Date
+  name    String   @db.VarChar(255)
+  content String
 }
