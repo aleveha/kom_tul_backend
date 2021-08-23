@@ -9,13 +9,17 @@ export const getAllUsers = async (): Promise<user[]> => {
     return prisma.user.findMany();
 };
 
-export const checkUser = async (body: user): Promise<boolean> => {
-    const { login, password } = body;
-    const user = await prisma.user.findFirst({
+const getUser = async (login: string): Promise<user | null> => {
+    return await prisma.user.findFirst({
         where: {
             login: login,
         },
     });
+};
+
+export const loginUser = async (body: user): Promise<boolean> => {
+    const { login, password } = body;
+    const user = await getUser(login);
 
     return user !== null && bcrypt.compare(password, user.password);
 };
@@ -23,7 +27,7 @@ export const checkUser = async (body: user): Promise<boolean> => {
 export const addUser = async (body: user): Promise<user | null> => {
     const { login, password } = body;
     const hash = bcrypt.hashSync(password, SALT_ROUNDS);
-    const userAlreadyExist = await checkUser(body);
+    const userAlreadyExist = !!(await getUser(login));
 
     if (userAlreadyExist) {
         return null;

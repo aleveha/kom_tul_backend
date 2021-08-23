@@ -1,6 +1,6 @@
 import express from "express";
 import * as path from "path";
-import { addUser, checkUser, getAllUsers } from "./Query/accountQueries";
+import { addUser, loginUser, getAllUsers } from "./Query/accountQueries";
 import {
     addNews,
     deleteNews,
@@ -65,7 +65,7 @@ app.get(path.join(apiPath, "/getAllUsers"), (req, res) => {
 });
 
 app.post(path.join(apiPath, "/checkUser"), (req, res) => {
-    checkUser(req.body)
+    loginUser(req.body)
         .then((response) => res.status(200).send(response))
         .catch((error) => res.status(500).send(error));
 });
