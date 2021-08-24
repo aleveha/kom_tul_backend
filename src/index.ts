@@ -1,12 +1,17 @@
 import express from "express";
 import * as path from "path";
-import { addUser, loginUser, getAllUsers } from "./Query/accountQueries";
+import { addUser, getAllUsers, loginUser } from "./Query/accountQueries";
 import {
     addNews,
     deleteNews,
     getAllNews,
     getTopNews,
 } from "./Query/newsQueries";
+import {
+    addEmployee,
+    deleteEmployee,
+    getAllEmployees,
+} from "./Query/employeeQueries";
 import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 
@@ -72,6 +77,24 @@ app.post(path.join(apiPath, "/checkUser"), (req, res) => {
 
 app.post(path.join(apiPath, "/addUser"), (req, res) => {
     addUser(req.body)
+        .then((response) => res.status(200).send(response))
+        .catch((error) => res.status(500).send(error));
+});
+
+app.get(path.join(apiPath, "/getAllEmployees"), (req, res) => {
+    getAllEmployees()
+        .then((response) => res.status(200).send(response))
+        .catch((error) => res.status(500).send(error));
+});
+
+app.get(path.join(apiPath, "/addEmployee"), (req, res) => {
+    addEmployee(req.body)
+        .then((response) => res.status(200).send(response))
+        .catch((error) => res.status(500).send(error));
+});
+
+app.get(path.join(apiPath, "/deleteEmployee"), (req, res) => {
+    deleteEmployee(req.body)
         .then((response) => res.status(200).send(response))
         .catch((error) => res.status(500).send(error));
 });

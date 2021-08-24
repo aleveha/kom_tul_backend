@@ -23,9 +23,23 @@ model user {
   password String @db.VarChar(255)
 }
 
-model news_old {
-  id      Int      @id @default(autoincrement())
-  date    DateTime @db.Date
-  name    String   @db.VarChar(255)
-  content String
+model employee {
+  id                Int     @id @default(autoincrement())
+  name              String  @db.VarChar(255)
+  status            String? @db.VarChar(10)
+  degree            String? @db.VarChar(10)
+  position_cz       String? @db.VarChar(255)
+  email             String? @db.VarChar(255)
+  phone             String? @db.VarChar(255)
+  place_cz          String? @db.VarChar(255)
+  consultation_cz   String? @db.VarChar(255)
+  specialization_cz String? @db.VarChar(255)
+  type              String? @db.VarChar(50)
+  studyType         String? @db.VarChar(255)
+  position_en       String? @db.VarChar(255)
+  place_en          String? @db.VarChar(255)
+  consultation_en   String? @db.VarChar(255)
+  specialization_en String? @db.VarChar(255)
+  uuid              String  @unique @db.VarChar(255)
+  order             Int     @unique
 }
