@@ -6,8 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prisma:gen": "npx prisma generate",
-    "prisma:int": "npx prisma introspect"
+    "prisma-setUpdatesFromDB": "npx prisma generate && npx prisma introspect"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +17,7 @@
     "@types/pg": "^8.6.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
-    "prisma": "^2.27.0"
+    "prisma": "^2.29.1"
   },
   "dependencies": {
     "@prisma/client": "^2.27.0",
