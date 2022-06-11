@@ -76,10 +76,6 @@ app.post(path.join(apiPath, "/addUser"), (req, res) => {
         .catch((error) => res.status(500).send(error));
 });
 
-try {
-    app.listen(PORT, (): void => {
-        console.log(`API is running on http://localhost:${PORT}${apiPath}`);
-    });
-} catch (error) {
-    console.log(`Error occurred: ${error.message}`);
-}
+app.listen(PORT, (): void => {
+    console.log(`API is running on http://localhost:${PORT}${apiPath}`);
+});

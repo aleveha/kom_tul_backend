@@ -20,4 +20,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn install
     - run: cp ~/dotenv/backend/.env ./
-    - run: pm2 restart yarn -- start --name backend
+    - run: yarn build
+    - run: pm2 start dist/index.js --name api
